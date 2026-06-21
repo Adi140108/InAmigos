@@ -1,0 +1,111 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout>
+  <Navbar />
+  <main class="legal-page">
+    <section class="page-hero">
+      <div class="container">
+        <div class="eyebrow">
+          <span class="eyebrow-dot"></span>
+          <span>LEGAL COMPLIANCE</span>
+        </div>
+        <h1 class="page-title">Privacy Policy</h1>
+        <p class="page-subtitle">Last updated: June 20, 2026</p>
+      </div>
+    </section>
+
+    <section class="legal-content">
+      <div class="container">
+        <div class="legal-box">
+          <h2>1. Collection of Information</h2>
+          <p>We collect information voluntarily provided by you when registering as a volunteer or making donations. This includes your name, email address, phone number, location, and PAN card number (required solely for generating official 80G tax-exemption certificates).</p>
+
+          <h2>2. Use of Information</h2>
+          <p>Your details are used to manage volunteer rosters, process mock transactions, dispatch 80G tax receipts, and email periodic updates regarding InAmigos Foundation campaigns. We do not sell, trade, or transfer your personal data to external third parties.</p>
+
+          <h2>3. Data Protection</h2>
+          <p>We deploy standard secure sockets layer (SSL) protection across all web forms. Access to personal donor credentials is restricted to authorized coordinators solely for legal audits and administrative compliance.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .legal-page {
+    background-color: var(--color-canvas);
+    padding-bottom: 96px;
+  }
+  .container {
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+  .page-hero {
+    padding: 160px 0 48px;
+  }
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-secondary);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--color-slate);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--color-accent);
+  }
+  .page-title {
+    font-size: 3rem;
+    font-weight: 500;
+    color: var(--color-ink);
+  }
+  .page-subtitle {
+    font-size: 1rem;
+    color: var(--color-slate);
+    margin-top: 12px;
+  }
+  .legal-content {
+    padding-bottom: 64px;
+  }
+  .legal-box {
+    background-color: var(--color-lifted);
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    border-radius: 40px;
+    padding: 48px;
+    box-shadow: rgba(0, 0, 0, 0.01) 0px 4px 16px;
+  }
+  .legal-box h2 {
+    font-size: 1.35rem;
+    font-weight: 500;
+    margin: 32px 0 16px;
+    color: var(--color-ink);
+  }
+  .legal-box h2:first-child {
+    margin-top: 0;
+  }
+  .legal-box p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--color-slate);
+  }
+  @media (max-width: 576px) {
+    .legal-box {
+      padding: 32px 24px;
+      border-radius: 24px;
+    }
+  }
+</style>

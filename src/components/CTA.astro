@@ -1,0 +1,200 @@
+---
+// CTA.astro
+---
+
+<section id="cta" class="cta-section reveal">
+  <div class="cta-container">
+    <div class="cta-cards-grid">
+      <!-- Card 1: Donate (White Surface) -->
+      <div class="cta-card card-donate">
+        <div class="card-eyebrow">
+          <span class="eyebrow-dot"></span>
+          <span>SUPPORT US</span>
+        </div>
+        <h3 class="card-title">Make a difference with your donation today.</h3>
+        <p class="card-desc">
+          All contributions are directed entirely to food distribution campaigns, children's classrooms, shelter repairs, and regional greening drives.
+        </p>
+        <div class="card-action">
+          <a href="/donate" class="btn-primary-pill">Donate Online</a>
+        </div>
+      </div>
+
+      <!-- Card 2: Volunteer (Inverted Near-Black Surface) -->
+      <div class="cta-card card-volunteer">
+        <div class="card-eyebrow eyebrow-inverted">
+          <span class="eyebrow-dot dot-inverted"></span>
+          <span>JOIN THE TEAM</span>
+        </div>
+        <h3 class="card-title title-inverted">Become a volunteer & drive change.</h3>
+        <p class="card-desc desc-inverted">
+          Step in, stand out, and create tangible social impact. Join a national network of 200+ interns and volunteers working across 28 states.
+        </p>
+        <div class="card-action">
+          <a href="/volunteer" class="btn-secondary-pill">Register as Volunteer</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-section {
+    padding: 96px 0 128px;
+    background-color: var(--color-canvas);
+  }
+
+  .cta-container {
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+
+  .cta-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+
+  .cta-card {
+    border-radius: 40px; /* Mastercard large stadium radius */
+    padding: 56px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 380px;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .cta-card:hover {
+    transform: translateY(-8px);
+  }
+
+  /* Card 1: White Theme */
+  .card-donate {
+    background-color: var(--color-white);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    box-shadow: rgba(0, 0, 0, 0.03) 0px 16px 40px 0px;
+  }
+
+  .card-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-secondary);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--color-slate);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--color-accent);
+  }
+
+  .card-title {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+    margin-bottom: 20px;
+  }
+
+  .card-desc {
+    font-size: 0.95rem;
+    font-weight: 450;
+    line-height: 1.5;
+    color: var(--color-slate);
+    margin-bottom: 36px;
+  }
+
+  .btn-primary-pill {
+    display: inline-block;
+    background-color: var(--color-ink);
+    color: var(--color-canvas);
+    font-family: var(--font-secondary);
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 12px 32px;
+    border-radius: 20px;
+    border: 1.5px solid var(--color-ink);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    text-align: center;
+  }
+
+  .btn-primary-pill:hover {
+    background-color: transparent;
+    color: var(--color-ink);
+    transform: translateY(-1px);
+  }
+
+  /* Card 2: Inverted Ink-Black Theme */
+  .card-volunteer {
+    background-color: var(--color-ink);
+    color: var(--color-white);
+    box-shadow: rgba(20, 20, 19, 0.12) 0px 24px 48px 0px;
+  }
+
+  .eyebrow-inverted {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .dot-inverted {
+    background-color: var(--color-accent-light);
+  }
+
+  .title-inverted {
+    color: var(--color-white);
+  }
+
+  .desc-inverted {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .btn-secondary-pill {
+    display: inline-block;
+    background-color: var(--color-white);
+    color: var(--color-ink);
+    font-family: var(--font-secondary);
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 12px 32px;
+    border-radius: 20px;
+    border: 1.5px solid var(--color-white);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    text-align: center;
+  }
+
+  .btn-secondary-pill:hover {
+    background-color: transparent;
+    color: var(--color-white);
+    transform: translateY(-1px);
+  }
+
+  /* Responsive styling */
+  @media (max-width: 991px) {
+    .cta-cards-grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .cta-card {
+      min-height: auto;
+      padding: 40px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .cta-card {
+      padding: 32px 24px;
+      border-radius: 24px;
+    }
+  }
+</style>

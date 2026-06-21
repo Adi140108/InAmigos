@@ -1,0 +1,522 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+const activeVolunteers = [
+  { name: "Faiz Khan", role: "Volunteer Supervisor", state: "Uttar Pradesh", img: "https://inamigosfoundation.org.in/public/storage/volunteers/1738081237.jpg" },
+  { name: "Manavi Jaiswal", role: "Junior Volunteer Associate", state: "Chhattisgarh", img: "https://inamigosfoundation.org.in/public/storage/volunteers/1738127845.jpg" },
+  { name: "Akash .", role: "Volunteer Associate", state: "Madhya Pradesh", img: "https://inamigosfoundation.org.in/public/storage/volunteers/1738080678.jpg" }
+];
+---
+
+<Layout>
+  <Navbar />
+  
+  <main class="volunteer-page">
+    <!-- Hero Header -->
+    <section class="page-hero">
+      <div class="container text-center">
+        <div class="eyebrow center">
+          <span class="eyebrow-dot"></span>
+          <span>JOIN THE CONSTELATION</span>
+        </div>
+        <h1 class="page-title">Become a Volunteer Associate</h1>
+        <p class="page-subtitle">
+          Step forward, share your talent, and work directly on our feeding programs, animal care shelters, or children's learning drives.
+        </p>
+      </div>
+    </section>
+
+    <!-- Registration Form Section -->
+    <section class="form-section">
+      <div class="container">
+        <div class="form-wrapper">
+          <form id="volunteerForm" class="volunteer-form">
+            <h2 class="form-title">Application Form</h2>
+            <p class="form-subtitle">Complete this application. Our coordinators will review details and schedule a call within 48 hours.</p>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" required placeholder="e.g., Adithya Kumar" class="form-input" />
+              </div>
+              <div class="form-group">
+                <label for="emailAddress">Email Address</label>
+                <input type="email" id="emailAddress" required placeholder="e.g., support@domain.com" class="form-input" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="phoneNumber">Phone Number</label>
+                <input type="tel" id="phoneNumber" required placeholder="e.g., +91 98765 43210" class="form-input" />
+              </div>
+              <div class="form-group">
+                <label for="preferredProject">Preferred Project</label>
+                <select id="preferredProject" required class="form-input">
+                  <option value="" disabled selected>Select an Initiative</option>
+                  <option value="bachpanshala">Project BachpanSala (Education)</option>
+                  <option value="udaan">Project Udaan (Women Empowerment)</option>
+                  <option value="jeev">Project Jeev (Animal Care)</option>
+                  <option value="seva">Project Seva (Social Relief)</option>
+                  <option value="prakriti">Project Prakriti (Environment)</option>
+                  <option value="vikas">Project Vikas (Youth Careers)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="userLocation">Location (City & State)</label>
+              <input type="text" id="userLocation" required placeholder="e.g., Raipur, Chhattisgarh" class="form-input" />
+            </div>
+
+            <div class="form-group">
+              <label for="motivation">Why do you wish to join InAmigos?</label>
+              <textarea id="motivation" required placeholder="Tell us briefly about your interests, skills, or what motivates you..." class="form-input text-area"></textarea>
+            </div>
+
+            <div class="form-submit">
+              <button type="submit" class="btn-submit-pill">Submit Application</button>
+            </div>
+          </form>
+
+          <!-- Interactive Success State overlay inside container -->
+          <div id="successOverlay" class="success-overlay" aria-hidden="true">
+            <div class="success-card">
+              <span class="success-icon">✓</span>
+              <h2>Application Received!</h2>
+              <p>
+                Thank you, <strong id="successName">Volunteer</strong>, for stepping up to make a difference. 
+                We have registered your interest in <strong id="successProject">Project</strong>. 
+                Check your inbox at <span id="successEmail">email</span> for a verification link shortly.
+              </p>
+              <button id="closeSuccess" class="btn-primary-pill">Back to Top</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Active Volunteer Roster -->
+    <section id="roster" class="roster-section">
+      <div class="container">
+        <div class="roster-header">
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            <span>MEET THE TEAM</span>
+          </div>
+          <h2 class="section-title">Our Active Supervisors & Associates</h2>
+          <p class="section-subtitle">Dedicated leaders coordinating regional programs and managing volunteer field tasks.</p>
+        </div>
+
+        <div class="roster-grid">
+          {activeVolunteers.map(vol => (
+            <div class="roster-card" key={vol.name}>
+              <div class="roster-avatar-wrapper">
+                <img src={vol.img} alt={vol.name} class="roster-avatar" />
+              </div>
+              <h3 class="vol-name">{vol.name}</h3>
+              <p class="vol-role">{vol.role}</p>
+              <p class="vol-state">📍 {vol.state}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</Layout>
+
+<script>
+  const form = document.getElementById('volunteerForm') as HTMLFormElement;
+  const overlay = document.getElementById('successOverlay');
+  const successName = document.getElementById('successName');
+  const successProject = document.getElementById('successProject');
+  const successEmail = document.getElementById('successEmail');
+  const closeBtn = document.getElementById('closeSuccess');
+
+  if (form && overlay) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const nameVal = (document.getElementById('fullName') as HTMLInputElement).value;
+      const emailVal = (document.getElementById('emailAddress') as HTMLInputElement).value;
+      const projDropdown = document.getElementById('preferredProject') as HTMLSelectElement;
+      const projVal = projDropdown.options[projDropdown.selectedIndex].text;
+
+      if (successName) successName.textContent = nameVal;
+      if (successProject) successProject.textContent = projVal;
+      if (successEmail) successEmail.textContent = emailVal;
+
+      overlay.classList.add('active');
+      overlay.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('no-scroll');
+    });
+  }
+
+  if (closeBtn && overlay && form) {
+    closeBtn.addEventListener('click', () => {
+      overlay.classList.remove('active');
+      overlay.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('no-scroll');
+      form.reset();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+</script>
+
+<style>
+  .volunteer-page {
+    background-color: var(--color-canvas);
+    padding-bottom: 96px;
+  }
+
+  .container {
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+
+  .text-center {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .page-hero {
+    padding: 160px 0 64px;
+  }
+
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-secondary);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--color-slate);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .eyebrow.center {
+    justify-content: center;
+  }
+
+  .eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--color-accent);
+  }
+
+  .page-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+    margin-bottom: 24px;
+  }
+
+  .page-subtitle {
+    font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+    font-weight: 450;
+    line-height: 1.5;
+    color: var(--color-slate);
+    max-width: 800px;
+  }
+
+  /* Form Container styles conforming to DESIGN.md */
+  .form-section {
+    padding-bottom: 96px;
+  }
+
+  .form-wrapper {
+    position: relative;
+    background-color: var(--color-lifted);
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    border-radius: 40px; /* Stadium container radius */
+    padding: 64px;
+    max-width: 860px;
+    margin: 0 auto;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 8px 32px;
+    overflow: hidden;
+  }
+
+  .form-title {
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--color-ink);
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+
+  .form-subtitle {
+    font-size: 0.95rem;
+    font-weight: 450;
+    color: var(--color-slate);
+    margin-bottom: 40px;
+    line-height: 1.5;
+  }
+
+  .volunteer-form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .form-group label {
+    font-family: var(--font-secondary);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-slate);
+  }
+
+  .form-input {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-dust);
+    border-radius: 20px; /* Button scale radius */
+    padding: 12px 20px;
+    font-family: var(--font-secondary);
+    font-size: 0.95rem;
+    color: var(--color-ink);
+    outline: none;
+    transition: all 0.25s ease;
+  }
+
+  .form-input:focus {
+    border-color: var(--color-accent);
+    box-shadow: rgba(1, 191, 123, 0.08) 0px 0px 0px 4px;
+  }
+
+  .text-area {
+    min-height: 120px;
+    resize: vertical;
+    border-radius: 20px;
+  }
+
+  .form-submit {
+    margin-top: 16px;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .btn-submit-pill {
+    background-color: var(--color-ink);
+    color: var(--color-canvas);
+    font-family: var(--font-secondary);
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 12px 36px;
+    border-radius: 20px;
+    border: 1.5px solid var(--color-ink);
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .btn-submit-pill:hover {
+    background-color: transparent;
+    color: var(--color-ink);
+  }
+
+  /* Interactive Form Success Overlay matching page styling */
+  .success-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(252, 251, 250, 0.98); /* lifted cream base opacity */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    padding: 48px;
+    z-index: 10;
+  }
+
+  .success-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .success-card {
+    text-align: center;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .success-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background-color: rgba(1, 191, 123, 0.1);
+    color: var(--color-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  .success-card h2 {
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--color-ink);
+    letter-spacing: -0.02em;
+  }
+
+  .success-card p {
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--color-slate);
+  }
+
+  .btn-primary-pill {
+    background-color: var(--color-ink);
+    color: var(--color-canvas);
+    font-family: var(--font-secondary);
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 10px 28px;
+    border-radius: 20px;
+    border: 1.5px solid var(--color-ink);
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .btn-primary-pill:hover {
+    background-color: transparent;
+    color: var(--color-ink);
+  }
+
+  /* Roster section */
+  .roster-section {
+    padding: 96px 0 128px;
+    border-top: 1px solid var(--color-dust);
+  }
+
+  .roster-header {
+    margin-bottom: 64px;
+    max-width: 680px;
+  }
+
+  .roster-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+
+  .roster-card {
+    background-color: var(--color-lifted);
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    border-radius: 40px;
+    padding: 40px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.01) 0px 4px 16px;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .roster-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(1, 191, 123, 0.2);
+  }
+
+  .roster-avatar-wrapper {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 24px;
+    border: 4px solid var(--color-white);
+    box-shadow: rgba(0, 0, 0, 0.06) 0px 8px 20px;
+  }
+
+  .roster-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .vol-name {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--color-ink);
+    margin-bottom: 8px;
+  }
+
+  .vol-role {
+    font-family: var(--font-secondary);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+  }
+
+  .vol-state {
+    font-size: 0.85rem;
+    color: var(--color-slate);
+    font-weight: 450;
+  }
+
+  /* Responsive styling */
+  @media (max-width: 991px) {
+    .roster-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .form-wrapper {
+      padding: 32px 24px;
+      border-radius: 24px;
+    }
+
+    .form-row {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .roster-grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .roster-card {
+      padding: 32px 24px;
+      border-radius: 24px;
+    }
+  }
+</style>

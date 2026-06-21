@@ -1,0 +1,533 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+const posts = [
+  {
+    id: "water-day-2025",
+    title: "World Water Day 2025",
+    date: "22 March 2025",
+    category: "Community Action",
+    summary: "This event highlights the importance of water conservation and collective action to ensure clean water for all.",
+    content: "Under Project Prakriti, InAmigos Foundation hosted region-wide water literacy assemblies on March 22, 2025. Volunteers visited villages across Chhattisgarh to demonstrate low-cost rainwater harvesting assemblies, discuss community pond rejuvenation, and distribute water purification tables. Over 1,200 rural households participated in the water safety workshops. We remain committed to helping rural sectors secure sustainable water sources.",
+    img: "https://inamigosfoundation.org.in/public/storage/events/1738238109.jpg"
+  },
+  {
+    id: "happiness-day-2025",
+    title: "International Day of Happiness 2025",
+    date: "20 March 2025",
+    category: "Youth Upliftment",
+    summary: "Join us in spreading joy, positivity, and well-being through engaging activities and inspiring student kits.",
+    content: "To celebrate the International Day of Happiness, Project BachpanSala team coordinates smile drives in slum learning blocks. Over 500 custom 'Happiness Kits' comprising storybooks, coloring pads, puzzles, and healthy fruit juices were distributed. Local volunteers held interactive games, music circles, and drawing contests. Making these classrooms a place of safety and joy is core to our educational vision.",
+    img: "https://inamigosfoundation.org.in/public/storage/events/1738135259.jpeg"
+  },
+  {
+    id: "women-science-2025",
+    title: "International Day of Women and Girls in Science 2025",
+    date: "11 February 2025",
+    category: "Education",
+    summary: "Reflecting on our science training workshops, coding bootcamps, and career seminars hosted for girls.",
+    content: "On February 11, 2025, Project Udaan and Project Vikas teamed up to sponsor a full-day seminar promoting STEM careers for girls. Held at Raipur, the event featured female scientists, computer engineers, and medical professionals speaking to over 300 high school students. The foundation also announced a dedicated scholarship pool offering coding kits and basic web-development mentorship to 50 deserving girls.",
+    img: "https://inamigosfoundation.org.in/public/storage/events/1738134836.jpeg"
+  }
+];
+---
+
+<Layout>
+  <Navbar />
+  
+  <main class="blog-page">
+    <!-- Hero Header -->
+    <section class="page-hero">
+      <div class="container text-center">
+        <div class="eyebrow center">
+          <span class="eyebrow-dot"></span>
+          <span>NGO UPDATES & STORIES</span>
+        </div>
+        <h1 class="page-title">Community Blog & Events</h1>
+        <p class="page-subtitle">
+          Stay updated with InAmigos field drives, campaign announcements, volunteer highlights, and impact stories across India.
+        </p>
+      </div>
+    </section>
+
+    <!-- Blog Posts Grid -->
+    <section class="blog-grid-section">
+      <div class="container">
+        <div class="blog-posts-grid">
+          {posts.map(post => (
+            <div class="blog-card" key={post.id}>
+              <div class="card-image-wrapper">
+                <img src={post.img} alt={post.title} class="card-image" />
+                <span class="category-badge">{post.category}</span>
+              </div>
+              <div class="card-content">
+                <div class="post-meta">📅 {post.date}</div>
+                <h3 class="post-title">{post.title}</h3>
+                <p class="post-summary">{post.summary}</p>
+                <div class="card-action">
+                  <button 
+                    class="btn-read-more" 
+                    data-title={post.title}
+                    data-date={post.date}
+                    data-category={post.category}
+                    data-content={post.content}
+                    data-image={post.img}
+                  >
+                    Read Article <span>→</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <!-- Modal overlay for reading post contents internally -->
+        <div id="articleModal" class="article-modal" aria-hidden="true">
+          <div class="modal-box">
+            <button id="closeModal" class="btn-close" aria-label="Close Article">×</button>
+            <div class="modal-image-wrapper">
+              <img id="modalImg" src="" alt="Article image" class="modal-image" />
+            </div>
+            <div class="modal-content">
+              <div class="modal-meta-row">
+                <span id="modalCategory" class="modal-category">Category</span>
+                <span id="modalDate" class="modal-date">Date</span>
+              </div>
+              <h2 id="modalTitle" class="modal-title">Article Title</h2>
+              <div class="modal-divider"></div>
+              <p id="modalBody" class="modal-body-text">Full text of the post goes here...</p>
+              
+              <div class="modal-action-row">
+                <a href="/volunteer" class="btn-primary-pill">Join as Volunteer</a>
+                <a href="/donate" class="btn-secondary-pill">Support Cause</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</Layout>
+
+<script>
+  const readMoreBtns = document.querySelectorAll('.btn-read-more');
+  const modal = document.getElementById('articleModal');
+  const closeModalBtn = document.getElementById('closeModal');
+  
+  const mImg = document.getElementById('modalImg') as HTMLImageElement;
+  const mTitle = document.getElementById('modalTitle');
+  const mDate = document.getElementById('modalDate');
+  const mCategory = document.getElementById('modalCategory');
+  const mBody = document.getElementById('modalBody');
+
+  readMoreBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (!modal) return;
+
+      const title = btn.getAttribute('data-title') || '';
+      const date = btn.getAttribute('data-date') || '';
+      const category = btn.getAttribute('data-category') || '';
+      const content = btn.getAttribute('data-content') || '';
+      const image = btn.getAttribute('data-image') || '';
+
+      if (mImg) mImg.src = image;
+      if (mTitle) mTitle.textContent = title;
+      if (mDate) mDate.textContent = `📅 ${date}`;
+      if (mCategory) mCategory.textContent = category;
+      if (mBody) mBody.textContent = content;
+
+      modal.classList.add('active');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('no-scroll');
+    });
+  });
+
+  if (closeModalBtn && modal) {
+    const hideModal = () => {
+      modal.classList.remove('active');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('no-scroll');
+    };
+    closeModalBtn.addEventListener('click', hideModal);
+    
+    // Close on click outside modal-box
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        hideModal();
+      }
+    });
+  }
+</script>
+
+<style>
+  .blog-page {
+    background-color: var(--color-canvas);
+    padding-bottom: 96px;
+  }
+
+  .container {
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+
+  .text-center {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .page-hero {
+    padding: 160px 0 64px;
+  }
+
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-secondary);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--color-slate);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .eyebrow.center {
+    justify-content: center;
+  }
+
+  .eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--color-accent);
+  }
+
+  .page-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+    margin-bottom: 24px;
+  }
+
+  .page-subtitle {
+    font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+    font-weight: 450;
+    line-height: 1.5;
+    color: var(--color-slate);
+    max-width: 800px;
+  }
+
+  /* Grid list */
+  .blog-grid-section {
+    padding-bottom: 64px;
+  }
+
+  .blog-posts-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+
+  .blog-card {
+    background-color: var(--color-lifted);
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    border-radius: 40px; /* Stadium container corners */
+    overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.01) 0px 4px 16px;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .blog-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(1, 191, 123, 0.2);
+  }
+
+  .card-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+  }
+
+  .card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .category-badge {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: var(--color-accent);
+    color: var(--color-white);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    padding: 6px 14px;
+    border-radius: 999px;
+    text-transform: uppercase;
+  }
+
+  .card-content {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .post-meta {
+    font-family: var(--font-secondary);
+    font-size: 0.8rem;
+    color: var(--color-slate);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+
+  .post-title {
+    font-size: 1.35rem;
+    font-weight: 500;
+    color: var(--color-ink);
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+  }
+
+  .post-summary {
+    font-size: 0.88rem;
+    font-weight: 450;
+    line-height: 1.5;
+    color: var(--color-slate);
+    margin-bottom: 24px;
+    flex-grow: 1;
+  }
+
+  .btn-read-more {
+    background: transparent;
+    border: none;
+    color: var(--color-ink);
+    font-family: var(--font-secondary);
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0;
+  }
+
+  .btn-read-more span {
+    transition: transform 0.2s ease;
+  }
+
+  .btn-read-more:hover {
+    color: var(--color-accent);
+  }
+
+  .btn-read-more:hover span {
+    transform: translateX(4px);
+  }
+
+  /* Interactive overlay modal panel */
+  .article-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(20, 20, 19, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 1050;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    padding: var(--gutter);
+  }
+
+  .article-modal.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .modal-box {
+    background-color: var(--color-lifted);
+    border-radius: 40px; /* Stadium container corners */
+    max-width: 680px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 32px 64px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    scrollbar-width: thin;
+  }
+
+  .btn-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: rgba(20, 20, 19, 0.8);
+    color: var(--color-white);
+    border: none;
+    font-size: 1.5rem;
+    font-weight: 300;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 15;
+    transition: background-color 0.2s ease;
+  }
+
+  .btn-close:hover {
+    background-color: var(--color-accent);
+  }
+
+  .modal-image-wrapper {
+    width: 100%;
+    height: 280px;
+    overflow: hidden;
+  }
+
+  .modal-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .modal-content {
+    padding: 48px;
+  }
+
+  .modal-meta-row {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    font-size: 0.82rem;
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+
+  .modal-category {
+    color: var(--color-accent);
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+
+  .modal-date {
+    color: var(--color-slate);
+  }
+
+  .modal-title {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 500;
+    color: var(--color-ink);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+  }
+
+  .modal-divider {
+    height: 1px;
+    background-color: var(--color-dust);
+    margin-bottom: 24px;
+  }
+
+  .modal-body-text {
+    font-size: 0.95rem;
+    font-weight: 450;
+    line-height: 1.6;
+    color: var(--color-slate);
+    margin-bottom: 36px;
+  }
+
+  .modal-action-row {
+    display: flex;
+    gap: 16px;
+  }
+
+  .btn-primary-pill {
+    background-color: var(--color-ink);
+    color: var(--color-canvas);
+    font-family: var(--font-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 10px 28px;
+    border-radius: 20px;
+    border: 1.5px solid var(--color-ink);
+    text-align: center;
+    transition: all 0.25s ease;
+  }
+
+  .btn-primary-pill:hover {
+    background-color: transparent;
+    color: var(--color-ink);
+  }
+
+  .btn-secondary-pill {
+    background-color: var(--color-white);
+    color: var(--color-ink);
+    font-family: var(--font-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 10px 28px;
+    border-radius: 20px;
+    border: 1.5px solid var(--color-ink);
+    text-align: center;
+    transition: all 0.25s ease;
+  }
+
+  .btn-secondary-pill:hover {
+    background-color: var(--color-ink);
+    color: var(--color-canvas);
+  }
+
+  /* Responsive styling */
+  @media (max-width: 991px) {
+    .blog-posts-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .blog-posts-grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .modal-content {
+      padding: 32px 24px;
+    }
+
+    .modal-action-row {
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .modal-action-row a {
+      width: 100%;
+    }
+  }
+</style>

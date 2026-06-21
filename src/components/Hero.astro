@@ -1,0 +1,293 @@
+---
+// Hero.astro
+---
+
+<section id="hero" class="hero-section">
+  <div class="hero-container">
+    <!-- Eyebrow -->
+    <div class="eyebrow">
+      <span class="eyebrow-dot"></span>
+      <span>INAMIGOS FOUNDATION</span>
+    </div>
+
+    <!-- Editorial Title -->
+    <h1 class="hero-title">
+      Nurturing Young Minds.<br />
+      Empowering Lives. Spreading Hope.
+    </h1>
+
+    <!-- Subtitle / Body -->
+    <p class="hero-subtitle">
+      A Section 8 registered non-profit organization dedicated to fostering positive social impact across India. 
+      Through educational access, animal rescue, women's skill development, and environmental action, we turn compassion into collective change.
+    </p>
+
+    <!-- CTAs -->
+    <div class="hero-ctas">
+      <a href="/donate" class="btn-primary-pill">Donate Now</a>
+      <a href="#about" class="btn-secondary-pill">Learn More</a>
+    </div>
+
+    <!-- Mastercard-Style Stadium Media Frame -->
+    <div class="stadium-frame-wrapper">
+      <div class="stadium-frame">
+        <img 
+          src="https://inamigosfoundation.org.in/public/storage/slideshow/1738235951.jpg" 
+          alt="BachpanSala child smiling, representing education and hope" 
+          class="stadium-image"
+          loading="eager"
+        />
+        <div class="stadium-overlay">
+          <div class="stadium-caption">
+            <span class="caption-tag">Project BachpanSala</span>
+            <h3>Ensuring quality education and bright futures for underprivileged children.</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-section {
+    padding-top: 140px; /* Space for floating nav pill */
+    padding-bottom: 96px;
+    display: flex;
+    justify-content: center;
+    background-color: var(--color-canvas);
+  }
+
+  .hero-container {
+    width: 100%;
+    max-width: var(--max-width);
+    padding: 0 var(--gutter);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* Staggered Load Animations */
+  .hero-container > * {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: heroFadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .eyebrow {
+    animation-delay: 0.05s;
+  }
+
+  .hero-title {
+    animation-delay: 0.15s;
+  }
+
+  .hero-subtitle {
+    animation-delay: 0.25s;
+  }
+
+  .hero-ctas {
+    animation-delay: 0.35s;
+  }
+
+  .stadium-frame-wrapper {
+    animation-name: heroZoomInUp;
+    animation-delay: 0.45s;
+    animation-duration: 1s;
+    transform: scale(0.98) translateY(24px);
+  }
+
+  @keyframes heroFadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes heroZoomInUp {
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-secondary);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--color-slate);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--color-accent);
+  }
+
+  .hero-title {
+    font-size: clamp(2.5rem, 5vw, 4rem); /* Responsive fluid typography */
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--color-ink);
+    margin-bottom: 24px;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+    font-weight: 450;
+    line-height: 1.45;
+    color: var(--color-slate);
+    max-width: 780px;
+    margin-bottom: 36px;
+  }
+
+  .hero-ctas {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 64px;
+  }
+
+  .btn-primary-pill {
+    background-color: var(--color-ink);
+    color: var(--color-canvas);
+    font-family: var(--font-secondary);
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 12px 32px;
+    border-radius: 20px;
+    border: 1.5px solid var(--color-ink);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 4px 12px;
+  }
+
+  .btn-primary-pill:hover {
+    background-color: transparent;
+    color: var(--color-ink);
+    transform: translateY(-1px);
+  }
+
+  .btn-secondary-pill {
+    background-color: var(--color-white);
+    color: var(--color-ink);
+    font-family: var(--font-secondary);
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 12px 32px;
+    border-radius: 20px;
+    border: 1.5px solid var(--color-ink);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .btn-secondary-pill:hover {
+    background-color: var(--color-ink);
+    color: var(--color-canvas);
+    transform: translateY(-1px);
+  }
+
+  /* Stadium media frame matching DESIGN.md */
+  .stadium-frame-wrapper {
+    width: 100%;
+    margin-top: 16px;
+  }
+
+  .stadium-frame {
+    width: 100%;
+    height: 480px;
+    border-radius: 40px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 24px 48px 0px; /* Soft atmospheric shadow */
+  }
+
+  .stadium-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .stadium-frame:hover .stadium-image {
+    transform: scale(1.03);
+  }
+
+  .stadium-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(20, 20, 19, 0.7) 0%, rgba(20, 20, 19, 0.2) 60%, rgba(20, 20, 19, 0) 100%);
+    display: flex;
+    align-items: flex-end;
+    padding: 48px;
+  }
+
+  .stadium-caption {
+    max-width: 600px;
+    color: var(--color-white);
+  }
+
+  .caption-tag {
+    display: inline-block;
+    background-color: var(--color-accent);
+    color: var(--color-white);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 4px 12px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+  }
+
+  .stadium-caption h3 {
+    color: var(--color-white);
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  /* Responsive styling */
+  @media (max-width: 768px) {
+    .hero-section {
+      padding-top: 110px;
+      padding-bottom: 64px;
+    }
+
+    .hero-title {
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+
+    .hero-ctas {
+      width: 100%;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 48px;
+    }
+
+    .hero-ctas a {
+      width: 100%;
+      text-align: center;
+    }
+
+    .stadium-frame {
+      height: 320px;
+      border-radius: 24px; /* Slightly smaller radius on mobile */
+    }
+
+    .stadium-overlay {
+      padding: 24px;
+    }
+  }
+</style>

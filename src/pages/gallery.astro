@@ -1,0 +1,324 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+const galleryItems = [
+  { img: "https://inamigosfoundation.org.in/public/storage/gallery/1743051485.jpg", title: "Project Seva Meal Drive", category: "relief", desc: "Serving warm, cooked food to underprivileged kids." },
+  { img: "https://inamigosfoundation.org.in/public/storage/gallery/1743051466.jpg", title: "Project BachpanSala Study Kit", category: "education", desc: "Handing out elementary textbooks and stationery." },
+  { img: "https://inamigosfoundation.org.in/public/storage/gallery/1743051449.jpg", title: "Jeev Veterinary Relief Run", category: "animals", desc: "Conducting health checkups for stray animals." },
+  { img: "https://inamigosfoundation.org.in/public/storage/gallery/1743051438.jpg", title: "Prakriti Tree Plantation Campaign", category: "environment", desc: "Planting saplings to increase green cover." },
+  { img: "https://inamigosfoundation.org.in/public/storage/slideshow/1738235951.jpg", title: "BachpanSala Rural Assembly", category: "education", desc: "A classroom session with tribal region students." },
+  { img: "https://inamigosfoundation.org.in/public/storage/slideshow/1738235638.jpg", title: "Project Udaan Vocational Session", category: "education", desc: "Skill training bootcamps for financial independence." },
+  { img: "https://inamigosfoundation.org.in/public/storage/slideshow/1738235697.jpg", title: "Project Jeev Shelter Rescue", category: "animals", desc: "Rescuing an injured stray dog for primary aid." },
+  { img: "https://inamigosfoundation.org.in/public/storage/slideshow/1738236132.jpg", title: "Emergency Blanket Distribution", category: "relief", desc: "Distributing winter blankets to families." },
+  { img: "https://inamigosfoundation.org.in/public/storage/slideshow/1738236201.jpg", title: "Community Seed Ball Assembly", category: "environment", desc: "Making seed balls for afforestation drives." }
+];
+---
+
+<Layout>
+  <Navbar />
+  
+  <main class="gallery-page">
+    <!-- Hero Header -->
+    <section class="page-hero">
+      <div class="container text-center">
+        <div class="eyebrow center">
+          <span class="eyebrow-dot"></span>
+          <span>FIELD HIGHLIGHTS</span>
+        </div>
+        <h1 class="page-title">Operational Gallery</h1>
+        <p class="page-subtitle">
+          Visual documentation of our activities in classrooms, street feeding operations, rescue camps, and environmental zones.
+        </p>
+      </div>
+    </section>
+
+    <!-- Gallery and filter area -->
+    <section class="gallery-section reveal">
+      <div class="container">
+        <!-- Filter Tabs -->
+        <div class="filter-tabs">
+          <button class="filter-btn active" data-filter="all">All Photos</button>
+          <button class="filter-btn" data-filter="education">Education</button>
+          <button class="filter-btn" data-filter="animals">Animal Protection</button>
+          <button class="filter-btn" data-filter="relief">Social Relief</button>
+          <button class="filter-btn" data-filter="environment">Environment</button>
+        </div>
+
+        <!-- Image Grid -->
+        <div class="gallery-grid" id="galleryGrid">
+          {galleryItems.map(item => (
+            <div class="gallery-card" data-category={item.category} key={item.title}>
+              <div class="image-box">
+                <img src={item.img} alt={item.title} class="gallery-image" loading="lazy" />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</Layout>
+
+<script>
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const galleryCards = document.querySelectorAll('.gallery-card');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Toggle button active
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filterValue = btn.getAttribute('data-filter') || 'all';
+
+      galleryCards.forEach(card => {
+        const cat = card.getAttribute('data-category');
+        
+        if (filterValue === 'all' || cat === filterValue) {
+          card.classList.remove('hidden');
+          // Trigger slight opacity delay
+          setTimeout(() => {
+            (card as HTMLElement).style.opacity = '1';
+            (card as HTMLElement).style.transform = 'scale(1)';
+          }, 50);
+        } else {
+          (card as HTMLElement).style.opacity = '0';
+          (card as HTMLElement).style.transform = 'scale(0.95)';
+          // Add hidden class after transition completes
+          setTimeout(() => {
+            card.classList.add('hidden');
+          }, 300);
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .gallery-page {
+    background-color: var(--color-canvas);
+    padding-bottom: 96px;
+  }
+
+  .container {
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+
+  .text-center {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .page-hero {
+    padding: 160px 0 64px;
+  }
+
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-secondary);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--color-slate);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .eyebrow.center {
+    justify-content: center;
+  }
+
+  .eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--color-accent);
+  }
+
+  .page-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+    margin-bottom: 24px;
+  }
+
+  .page-subtitle {
+    font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+    font-weight: 450;
+    line-height: 1.5;
+    color: var(--color-slate);
+    max-width: 800px;
+  }
+
+  /* Filters */
+  .gallery-section {
+    padding-bottom: 64px;
+  }
+
+  .filter-tabs {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 56px;
+  }
+
+  .filter-btn {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-dust);
+    color: var(--color-slate);
+    padding: 10px 24px;
+    border-radius: 999px; /* Pill buttons */
+    font-family: var(--font-secondary);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .filter-btn:hover {
+    border-color: var(--color-ink);
+    color: var(--color-ink);
+  }
+
+  .filter-btn.active {
+    background-color: var(--color-ink);
+    border-color: var(--color-ink);
+    color: var(--color-canvas);
+  }
+
+  /* Grid Layout */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+
+  .gallery-card {
+    border-radius: 40px; /* Stadium style rounded card */
+    overflow: hidden;
+    aspect-ratio: 1;
+    box-shadow: rgba(0, 0, 0, 0.04) 0px 8px 24px;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .gallery-card.hidden {
+    display: none;
+  }
+
+  .image-box {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .gallery-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .gallery-card:hover .gallery-image {
+    transform: scale(1.05);
+  }
+
+  /* Overlays */
+  .hover-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(20, 20, 19, 0.8);
+    display: flex;
+    align-items: flex-end;
+    padding: 32px;
+    opacity: 0;
+    transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .gallery-card:hover .hover-overlay {
+    opacity: 1;
+  }
+
+  .hover-details {
+    color: var(--color-white);
+    transform: translateY(16px);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .gallery-card:hover .hover-details {
+    transform: translateY(0);
+  }
+
+  .category-tag {
+    display: inline-block;
+    background-color: var(--color-accent);
+    color: var(--color-white);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    padding: 4px 10px;
+    border-radius: 8px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .hover-details h3 {
+    color: var(--color-white);
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+
+  .hover-details p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.82rem;
+    font-weight: 450;
+    line-height: 1.4;
+  }
+
+  /* Responsive styling */
+  @media (max-width: 991px) {
+    .gallery-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .page-hero {
+      padding-top: 120px;
+      padding-bottom: 48px;
+    }
+
+    .gallery-grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .gallery-card {
+      border-radius: 24px;
+    }
+  }
+</style>

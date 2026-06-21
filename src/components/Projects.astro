@@ -1,0 +1,374 @@
+---
+
+const projects = [
+  {
+    id: "bachpanshala",
+    tag: "EDUCATION",
+    title: "Project Bachpanshala",
+    desc: "We deliver elementary schooling, healthcare aid, nutrition guidance, and basic mentorship programs to underprivileged children across rural sectors.",
+    img: "https://inamigosfoundation.org.in/public/storage/slideshow/1738235951.jpg",
+    link: "/causes"
+  },
+  {
+    id: "udaan",
+    tag: "EMPOWERMENT",
+    title: "Project Udaan",
+    desc: "Empowering women from marginalized backgrounds through targeted vocational skill training, financial literacy sessions, and self-reliance bootcamps.",
+    img: "https://inamigosfoundation.org.in/public/storage/slideshow/1738235638.jpg",
+    link: "/causes"
+  },
+  {
+    id: "jeev",
+    tag: "ANIMAL WELFARE",
+    title: "Project Jeev",
+    desc: "Caring for stray and injured animals by running localized feeding drives, rescue support, shelter assistance, and veterinary medical aid campaigns.",
+    img: "https://inamigosfoundation.org.in/public/storage/slideshow/1738235697.jpg",
+    link: "/causes"
+  },
+  {
+    id: "seva",
+    tag: "RELIEF",
+    title: "Project Seva",
+    desc: "Distributing hot nutritious meals, clean drinking water, and essential clothing resources to families living in slums and low-income districts.",
+    img: "https://inamigosfoundation.org.in/public/storage/slideshow/1738236132.jpg",
+    link: "/causes"
+  },
+  {
+    id: "prakriti",
+    tag: "ENVIRONMENT",
+    title: "Project Prakriti",
+    desc: "Driving regional conservation efforts through regular seed plantation campaigns, plastic pollution cleanups, and water conservation workshops.",
+    img: "https://inamigosfoundation.org.in/public/storage/slideshow/1738236201.jpg",
+    link: "/causes"
+  },
+  {
+    id: "vikas",
+    tag: "YOUTH CAREERS",
+    title: "Project Vikas",
+    desc: "Creating structured digital literacy bootcamps, resume-building workshops, and vocational internship avenues to bolster youth employability.",
+    img: "https://inamigosfoundation.org.in/public/storage/settings/1738236437.jpg",
+    link: "/causes"
+  }
+];
+---
+
+<section id="projects" class="projects-section reveal">
+  <!-- Ghost Watermark -->
+  <div class="ghost-watermark">INITIATIVES</div>
+
+  <!-- Decorative Orbit Lines (SVG background) -->
+  <div class="orbit-container" aria-hidden="true">
+    <svg class="orbit-svg" viewBox="0 0 1440 1200" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <!-- Arc 1: Bachpanshala to Udaan -->
+      <path d="M 280 250 C 400 350, 600 150, 780 400" stroke="#00CC83" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.6" />
+      <!-- Arc 2: Udaan to Jeev -->
+      <path d="M 780 400 C 950 600, 500 700, 320 850" stroke="#00CC83" stroke-width="1.5" stroke-dasharray="1 0" opacity="0.5" />
+      <!-- Arc 3: Jeev to Seva -->
+      <path d="M 320 850 C 400 1000, 750 900, 850 1150" stroke="#00CC83" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.6" />
+      <!-- Arc 4: Seva to Prakriti -->
+      <path d="M 850 1150 C 1000 1300, 1100 1100, 1250 850" stroke="#00CC83" stroke-width="1.2" stroke-dasharray="1 0" opacity="0.4" />
+    </svg>
+  </div>
+
+  <div class="projects-container">
+    <div class="section-header">
+      <div class="eyebrow">
+        <span class="eyebrow-dot"></span>
+        <span>Ongoing Campaigns</span>
+      </div>
+      <h2 class="section-title">Constellation of Social Initiatives</h2>
+      <p class="section-subtitle">
+        We tackle social, environmental, and educational challenges simultaneously, building connected pathways toward sustainable change.
+      </p>
+    </div>
+
+    <!-- Asymmetric grid matching DESIGN.md -->
+    <div class="constellation-grid">
+      {projects.map((project, idx) => (
+        <div class={`project-card card-${idx + 1}`} key={project.id}>
+          <div class="portrait-wrapper">
+            <img 
+              src={project.img} 
+              alt={project.title} 
+              class="portrait-image" 
+              loading="lazy" 
+            />
+            <a href={project.link} class="satellite-cta" aria-label={`Read details of ${project.title}`}>
+              <span class="arrow-icon">→</span>
+            </a>
+          </div>
+          <div class="project-info">
+            <div class="project-eyebrow">
+              <span class="accent-dot"></span>
+              <span>{project.tag}</span>
+            </div>
+            <h3 class="project-title">{project.title}</h3>
+            <p class="project-desc">{project.desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .projects-section {
+    padding: 128px 0;
+    background-color: var(--color-canvas);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ghost-watermark {
+    position: absolute;
+    bottom: 80px;
+    right: -40px;
+    font-family: var(--font-primary);
+    font-size: clamp(6rem, 15vw, 12rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    color: #E8E2DA;
+    user-select: none;
+    pointer-events: none;
+    line-height: 1;
+    z-index: 0;
+  }
+
+  .orbit-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .orbit-svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .projects-container {
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+    position: relative;
+    z-index: 2;
+  }
+
+  .section-header {
+    margin-bottom: 96px;
+    max-width: 680px;
+  }
+
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-secondary);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--color-slate);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--color-accent);
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+    margin-bottom: 24px;
+  }
+
+  .section-subtitle {
+    font-size: 1.05rem;
+    font-weight: 450;
+    color: var(--color-slate);
+    line-height: 1.5;
+  }
+
+  /* Asymmetric Placement pattern */
+  .constellation-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 96px 64px;
+  }
+
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 320px;
+    justify-self: center;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .project-card:hover {
+    transform: translateY(-8px);
+  }
+
+  /* Asymmetric staggering matching layout system */
+  .card-1 { justify-self: start; transform: translateY(0); }
+  .card-2 { justify-self: center; transform: translateY(80px); }
+  .card-3 { justify-self: end; transform: translateY(-20px); }
+  .card-4 { justify-self: start; transform: translateY(60px); }
+  .card-5 { justify-self: center; transform: translateY(140px); }
+  .card-6 { justify-self: end; transform: translateY(40px); }
+
+  /* Perfect circular portrait image mask */
+  .portrait-wrapper {
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    position: relative;
+    margin-bottom: 28px;
+    box-shadow: rgba(0, 0, 0, 0.06) 0px 12px 32px 0px;
+    background-color: var(--color-white);
+  }
+
+  .portrait-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid var(--color-white);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .project-card:hover .portrait-image {
+    transform: scale(1.05);
+  }
+
+  /* White Satellite CTA docked bottom-right protruding 40% */
+  .satellite-cta {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background-color: var(--color-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 8px 24px;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 5;
+  }
+
+  .arrow-icon {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--color-ink);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .satellite-cta:hover {
+    background-color: var(--color-ink);
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px;
+    transform: scale(1.08);
+  }
+
+  .satellite-cta:hover .arrow-icon {
+    color: var(--color-canvas);
+    transform: rotate(-45deg);
+  }
+
+  /* Info */
+  .project-info {
+    padding: 0 12px;
+  }
+
+  .project-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-secondary);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--color-slate);
+    margin-bottom: 8px;
+  }
+
+  .accent-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: var(--color-accent);
+  }
+
+  .project-title {
+    font-size: 1.25rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+    margin-bottom: 12px;
+  }
+
+  .project-desc {
+    font-size: 0.88rem;
+    font-weight: 450;
+    line-height: 1.5;
+    color: var(--color-slate);
+  }
+
+  /* Responsive layout strategy */
+  @media (max-width: 991px) {
+    .constellation-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 64px 32px;
+    }
+
+    /* Stagger offsets adjusted for 2-column layout */
+    .card-1 { justify-self: center; transform: none; }
+    .card-2 { justify-self: center; transform: translateY(40px); }
+    .card-3 { justify-self: center; transform: none; }
+    .card-4 { justify-self: center; transform: translateY(40px); }
+    .card-5 { justify-self: center; transform: none; }
+    .card-6 { justify-self: center; transform: translateY(40px); }
+
+    .orbit-container {
+      display: none;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .projects-section {
+      padding: 64px 0;
+    }
+
+    .section-header {
+      margin-bottom: 48px;
+      text-align: left;
+    }
+
+    .constellation-grid {
+      grid-template-columns: 1fr;
+      gap: 48px 0;
+    }
+
+    .card-1, .card-2, .card-3, .card-4, .card-5, .card-6 {
+      justify-self: center;
+      transform: none;
+    }
+
+    .portrait-wrapper {
+      width: 220px;
+      height: 220px;
+    }
+  }
+</style>

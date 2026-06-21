@@ -1,0 +1,341 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout>
+  <Navbar />
+  
+  <main class="about-page">
+    <!-- Page Header Hero -->
+    <section class="page-hero">
+      <div class="container">
+        <div class="eyebrow">
+          <span class="eyebrow-dot"></span>
+          <span>ESTABLISHED 2020</span>
+        </div>
+        <h1 class="page-title">Serving Humanity. Empowering Lives.</h1>
+        <p class="page-subtitle">
+          InAmigos Foundation is licensed under Section 8 of the Companies Act by the Central Government, dedicated to sustainable social development across India.
+        </p>
+      </div>
+    </section>
+
+    <!-- Core Vision & Value Cards -->
+    <section class="values-section">
+      <div class="container">
+        <div class="grid-3">
+          <div class="value-card">
+            <span class="value-num">01</span>
+            <h3>Our Mission</h3>
+            <p>To break cycles of poverty and environmental degradation by fostering community-level initiatives in classrooms, fields, and animal shelters.</p>
+          </div>
+          <div class="value-card">
+            <span class="value-num">02</span>
+            <h3>Our Vision</h3>
+            <p>To build an inclusive society where access to nutrition, education, safety, and economic self-reliance is shared by every individual.</p>
+          </div>
+          <div class="value-card">
+            <span class="value-num">03</span>
+            <h3>Our Approach</h3>
+            <p>Relying on direct on-ground engagement, strict transparency, corporate partnerships, and a passionate team of volunteers across 28 states.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Detailed Founding Narrative -->
+    <section class="narrative-section">
+      <div class="container">
+        <div class="narrative-grid">
+          <div class="narrative-content">
+            <h2 class="section-title">The Genesis of InAmigos</h2>
+            <p class="narrative-text">
+              InAmigos Foundation was born on September 23, 2020, during a time when local support systems were most stressed. Founded by <strong>Mr. Govind Shukla</strong> (CEO) and headquartered in Chhattisgarh, the foundation began as a localized feeding group. Over the years, it expanded into a robust Section 8 non-profit with operations scaling pan-India.
+            </p>
+            <p class="narrative-text">
+              Today, InAmigos coordinates 6 key projects, deploying volunteers to drive educational support, animal welfare, women's skill development, and environmental sustainability. By coordinating closely with local administrations and corporate CSR sponsors, we ensure every program matches real community needs.
+            </p>
+          </div>
+          <div class="narrative-image-wrapper">
+            <img 
+              src="https://inamigosfoundation.org.in/public/storage/volunteers/1738077310.png" 
+              alt="Mr. Govind Shukla - Founder & CEO of InAmigos Foundation" 
+              class="narrative-image"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Legal Certifications & Tax Benefits Section -->
+    <section id="benefits" class="certifications-section">
+      <div class="container">
+        <div class="certifications-header">
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            <span>TRANSPARENCY</span>
+          </div>
+          <h2 class="section-title">Official Registrations & Tax Exemption</h2>
+          <p class="section-subtitle">We operate under formal central government license, offering verified tax benefits for all contributions.</p>
+        </div>
+
+        <div class="grid-2">
+          <!-- Card: 80G & 12A -->
+          <div class="cert-card">
+            <div class="cert-icon">✓</div>
+            <h3>80G & 12A Certifications</h3>
+            <p class="cert-desc">
+              All financial donations made to InAmigos Foundation qualify for tax deductions under <strong>Section 80G</strong> of the Income Tax Act, 1961. Upon completing your donation, a formal tax-exempt receipt is sent directly to your registered email for direct submission during IT returns.
+            </p>
+          </div>
+
+          <!-- Card: CSR-1 -->
+          <div id="csr" class="cert-card">
+            <div class="cert-icon">🏢</div>
+            <h3>CSR-1 Registered Collaboration</h3>
+            <p class="cert-desc">
+              The foundation is formally registered with the Ministry of Corporate Affairs (MCA) to receive Corporate Social Responsibility (CSR) funds. We assist corporate partners in budgeting, executing, and reporting social initiatives aligned with Schedule VII of the Companies Act.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</Layout>
+
+<style>
+  .about-page {
+    background-color: var(--color-canvas);
+    padding-bottom: 64px;
+  }
+
+  .container {
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+
+  /* Hero Section */
+  .page-hero {
+    padding: 160px 0 80px;
+    background-color: var(--color-canvas);
+  }
+
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-secondary);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--color-slate);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--color-accent);
+  }
+
+  .page-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+    margin-bottom: 24px;
+  }
+
+  .page-subtitle {
+    font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+    font-weight: 450;
+    line-height: 1.5;
+    color: var(--color-slate);
+    max-width: 800px;
+  }
+
+  /* Values Section */
+  .values-section {
+    padding: 64px 0;
+  }
+
+  .grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+
+  .value-card {
+    background-color: var(--color-lifted);
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    padding: 48px;
+    border-radius: 40px;
+    box-shadow: rgba(0, 0, 0, 0.01) 0px 4px 16px;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .value-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(1, 191, 123, 0.2);
+  }
+
+  .value-num {
+    display: block;
+    font-family: var(--font-primary);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    margin-bottom: 24px;
+  }
+
+  .value-card h3 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--color-ink);
+    margin-bottom: 16px;
+    letter-spacing: -0.01em;
+  }
+
+  .value-card p {
+    font-size: 0.95rem;
+    font-weight: 450;
+    line-height: 1.6;
+  }
+
+  /* Narrative Section */
+  .narrative-section {
+    padding: 96px 0;
+  }
+
+  .narrative-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 64px;
+    align-items: center;
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 3.5vw, 2.5rem);
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+    margin-bottom: 32px;
+  }
+
+  .narrative-text {
+    font-size: 1.05rem;
+    font-weight: 450;
+    line-height: 1.6;
+    color: var(--color-slate);
+    margin-bottom: 20px;
+  }
+
+  .narrative-image-wrapper {
+    border-radius: 40px;
+    overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.06) 0px 16px 40px;
+  }
+
+  .narrative-image {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  /* Certifications */
+  .certifications-section {
+    padding: 96px 0 128px;
+    border-top: 1px solid var(--color-dust);
+  }
+
+  .certifications-header {
+    margin-bottom: 64px;
+    max-width: 700px;
+  }
+
+  .section-subtitle {
+    font-size: 1.05rem;
+    font-weight: 450;
+    color: var(--color-slate);
+    line-height: 1.5;
+    margin-top: 16px;
+  }
+
+  .grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+
+  .cert-card {
+    background-color: var(--color-lifted);
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    padding: 48px;
+    border-radius: 40px;
+    box-shadow: rgba(0, 0, 0, 0.01) 0px 4px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cert-icon {
+    font-size: 2.25rem;
+    margin-bottom: 24px;
+    color: var(--color-accent);
+  }
+
+  .cert-card h3 {
+    font-size: 1.35rem;
+    font-weight: 500;
+    margin-bottom: 16px;
+    color: var(--color-ink);
+  }
+
+  .cert-desc {
+    font-size: 0.95rem;
+    font-weight: 450;
+    line-height: 1.6;
+    color: var(--color-slate);
+  }
+
+  /* Responsive styles */
+  @media (max-width: 991px) {
+    .grid-3 {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .narrative-grid {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+
+    .grid-2 {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .page-hero {
+      padding-top: 120px;
+      padding-bottom: 48px;
+    }
+
+    .value-card, .cert-card {
+      padding: 32px 24px;
+      border-radius: 24px;
+    }
+  }
+</style>

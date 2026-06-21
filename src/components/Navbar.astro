@@ -1,0 +1,331 @@
+---
+// Floating pill navigation component
+const { pathname } = Astro.url;
+const normalizedPath = pathname.replace(/\/$/, "");
+const isActive = (path: string) => {
+  if (path === "/") {
+    return pathname === "/";
+  }
+  return normalizedPath === path;
+};
+---
+
+<header class="nav-container">
+  <div class="nav-pill">
+    <a href="/" class="logo">
+      <img src="https://inamigosfoundation.org.in/public/storage/settings/174421468011.jpg" alt="InAmigos Foundation Logo" />
+      <span class="logo-text">InAmigos<span class="brand-dot">.</span></span>
+    </a>
+    <!-- Desktop Navigation Links -->
+    <nav class="desktop-menu">
+      <a href="/" class={`nav-link ${isActive("/") ? "active" : ""}`}>Home</a>
+      <a href="/about" class={`nav-link ${isActive("/about") ? "active" : ""}`}>About Us</a>
+      <a href="/work" class={`nav-link ${isActive("/work") ? "active" : ""}`}>Our Work</a>
+      <a href="/team" class={`nav-link ${isActive("/team") ? "active" : ""}`}>Our Team</a>
+      <a href="/causes" class={`nav-link ${isActive("/causes") ? "active" : ""}`}>Projects</a>
+      <a href="/impact" class={`nav-link ${isActive("/impact") ? "active" : ""}`}>Our Impact</a>
+      <a href="/volunteer" class={`nav-link ${isActive("/volunteer") ? "active" : ""}`}>Volunteer</a>
+    </nav>
+ 
+    <div class="nav-right">
+      <a href="/donate" class="btn-primary">Donate</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+ 
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu-overlay" id="mobileMenu">
+    <nav class="mobile-nav">
+      <a href="/" class={`mobile-link ${isActive("/") ? "active" : ""}`}>Home</a>
+      <a href="/about" class={`mobile-link ${isActive("/about") ? "active" : ""}`}>About Us</a>
+      <a href="/work" class={`mobile-link ${isActive("/work") ? "active" : ""}`}>Our Work</a>
+      <a href="/team" class={`mobile-link ${isActive("/team") ? "active" : ""}`}>Our Team</a>
+      <a href="/causes" class={`mobile-link ${isActive("/causes") ? "active" : ""}`}>Projects</a>
+      <a href="/impact" class={`mobile-link ${isActive("/impact") ? "active" : ""}`}>Our Impact</a>
+      <a href="/volunteer" class={`mobile-link ${isActive("/volunteer") ? "active" : ""}`}>Volunteer</a>
+      <a href="/donate" class="btn-primary mobile-btn">Donate</a>
+    </nav>
+  </div></header>
+
+<script>
+  const menuToggle = document.getElementById('menuToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const mobileLinks = document.querySelectorAll('.mobile-link');
+  const navPill = document.querySelector('.nav-pill');
+
+  if (menuToggle && mobileMenu) {
+    const toggleActive = () => {
+      menuToggle.classList.toggle('active');
+      mobileMenu.classList.toggle('open');
+      document.body.classList.toggle('no-scroll');
+    };
+
+    menuToggle.addEventListener('click', toggleActive);
+
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        menuToggle.classList.remove('active');
+        mobileMenu.classList.remove('open');
+        document.body.classList.remove('no-scroll');
+      });
+    });
+  }
+
+  // Scroll shrink effect
+  if (navPill) {
+    const handleScroll = () => {
+      if (window.scrollY > 30) {
+        navPill.classList.add('scrolled');
+      } else {
+        navPill.classList.remove('scrolled');
+      }
+    };
+    handleScroll();
+    window.addEventListener('scroll', handleScroll);
+  }
+</script>
+
+<style>
+  .nav-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 20px var(--gutter);
+    display: flex;
+    justify-content: center;
+  }
+
+  .nav-pill {
+    width: 100%;
+    max-width: var(--max-width);
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 999px;
+    padding: 14px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: rgba(0, 0, 0, 0.04) 0px 4px 24px 0px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .nav-pill.scrolled {
+    padding: 8px 32px;
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 8px 32px 0px;
+    background-color: rgba(255, 255, 255, 0.98);
+    border-color: rgba(0, 0, 0, 0.08);
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo img {
+    height: 64px;
+    width: auto;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .nav-pill.scrolled .logo img {
+    height: 44px;
+  }
+
+  .logo-text {
+    font-family: var(--font-primary);
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--color-ink);
+    transition: font-size 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .nav-pill.scrolled .logo-text {
+    font-size: 1.35rem;
+  }
+
+  .brand-dot {
+    color: var(--color-accent);
+  }
+
+  .desktop-menu {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .nav-link {
+    font-family: var(--font-secondary);
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--color-slate);
+    position: relative;
+    padding: 4px 0;
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    color: var(--color-ink);
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background-color: var(--color-accent);
+    transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    width: 100%;
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    background-color: var(--color-ink);
+    color: var(--color-canvas);
+    font-family: var(--font-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 8px 24px;
+    border-radius: 20px;
+    border: 1.5px solid var(--color-ink);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    text-align: center;
+  }
+
+  .btn-primary:hover {
+    background-color: transparent;
+    color: var(--color-ink);
+    transform: translateY(-1px);
+  }
+
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 16px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1010;
+  }
+
+  .menu-toggle span {
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-ink);
+    border-radius: 2px;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Hamburger Active Animation */
+  .menu-toggle.active span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-toggle.active span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* Mobile Menu Overlay Styles */
+  .mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(243, 240, 238, 0.98); /* warm putty cream opacity */
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .mobile-menu-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .mobile-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    text-align: center;
+  }
+
+  .mobile-link {
+    font-family: var(--font-primary);
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--color-ink);
+    letter-spacing: -0.5px;
+    transition: color 0.2s ease;
+  }
+
+  .mobile-link:hover,
+  .mobile-link.active {
+    color: var(--color-accent);
+  }
+
+  .mobile-btn {
+    font-size: 1.1rem;
+    padding: 12px 36px;
+    border-radius: 24px;
+    margin-top: 16px;
+  }
+
+  :global(body.no-scroll) {
+    overflow: hidden;
+  }
+
+  /* Responsive breakpoints */
+  @media (max-width: 768px) {
+    .desktop-menu {
+      display: none;
+    }
+
+    .menu-toggle {
+      display: flex;
+    }
+
+    .nav-pill {
+      padding: 10px 20px;
+    }
+
+    .nav-right .btn-primary {
+      display: none; /* hidden on small screen header, shown in full menu */
+    }
+  }
+</style>

@@ -1,0 +1,187 @@
+---
+// Stats.astro
+const stats = [
+  { value: "50,000+", label: "Beneficiaries Served", desc: "Children, families, and animals supported nationwide." },
+  { value: "28", label: "States Impacted", desc: "Initiatives launched across regional states in India." },
+  { value: "200+", label: "Active Volunteers", desc: "Professionals and youth dedicated to making a difference." },
+  { value: "6", label: "Core Social Causes", desc: "Education, food, animal care, environment, skills & relief." }
+];
+---
+
+<section id="stats" class="stats-section reveal">
+  <div class="stats-container">
+    <div class="stats-grid">
+      <!-- Left side: Narrative -->
+      <div class="stats-narrative">
+        <div class="eyebrow">
+          <span class="eyebrow-dot"></span>
+          <span>Measuring Impact</span>
+        </div>
+        <h2 class="stats-title">Empowering communities through measurable action.</h2>
+        <p class="stats-desc">
+          Every contribution is structured to yield direct on-ground benefits. From daily feeding drives under Project Seva to setting up learning sessions for BachpanSala, our tracking metrics reflect honest, sustainable progress.
+        </p>
+      </div>
+
+      <!-- Right side: Numerical Grid -->
+      <div class="stats-number-grid">
+        {stats.map(stat => (
+          <div class="stat-card">
+            <div class="stat-value">
+              {stat.value}
+            </div>
+            <div class="stat-label">
+              <span class="label-dot"></span>
+              {stat.label}
+            </div>
+            <p class="stat-desc-text">{stat.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .stats-section {
+    padding: 128px 0;
+    background-color: var(--color-canvas);
+    border-top: 1px solid var(--color-dust);
+    border-bottom: 1px solid var(--color-dust);
+  }
+
+  .stats-container {
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 64px;
+    align-items: center;
+  }
+
+  .stats-narrative {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-secondary);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--color-slate);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--color-accent);
+  }
+
+  .stats-title {
+    font-size: clamp(2rem, 3.5vw, 2.5rem);
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+    margin-bottom: 24px;
+  }
+
+  .stats-desc {
+    font-size: 1.05rem;
+    font-weight: 450;
+    line-height: 1.55;
+    color: var(--color-slate);
+  }
+
+  .stats-number-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .stat-card {
+    background-color: var(--color-lifted); /* Lifted Cream */
+    padding: 36px;
+    border-radius: 24px; /* Matches minor containers */
+    box-shadow: rgba(0, 0, 0, 0.01) 0px 4px 16px;
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: rgba(0, 0, 0, 0.03) 0px 8px 24px;
+    border-color: rgba(1, 191, 123, 0.2); /* Soft highlight outline */
+  }
+
+  .stat-value {
+    font-family: var(--font-primary);
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    color: var(--color-ink);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  .stat-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-secondary);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--color-ink);
+    margin-bottom: 8px;
+  }
+
+  .label-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--color-accent);
+  }
+
+  .stat-desc-text {
+    font-size: 0.85rem;
+    font-weight: 450;
+    line-height: 1.4;
+    color: var(--color-slate);
+  }
+
+  /* Responsive layout */
+  @media (max-width: 991px) {
+    .stats-grid {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .stats-section {
+      padding: 64px 0;
+    }
+
+    .stats-number-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .stat-card {
+      padding: 24px;
+    }
+  }
+</style>

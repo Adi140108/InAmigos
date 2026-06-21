@@ -1,0 +1,387 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+const causes = [
+  {
+    id: "bachpanshala",
+    title: "Project Bachpanshala",
+    tag: "EDUCATION ACCESS",
+    desc: "Provides basic schooling supplies, books, nutritious mid-day meals, and tuition fees for children in low-income tribal areas.",
+    img: "https://inamigosfoundation.org.in/public/storage/slideshow/1738235951.jpg",
+    raised: 340000,
+    goal: 500000,
+    donors: 142
+  },
+  {
+    id: "udaan",
+    title: "Project Udaan",
+    tag: "WOMEN EMPOWERMENT",
+    desc: "Sponsors sewing machines, computer literacy modules, and financial independence mentorship cohorts for marginalized women.",
+    img: "https://inamigosfoundation.org.in/public/storage/slideshow/1738235638.jpg",
+    raised: 180000,
+    goal: 300000,
+    donors: 87
+  },
+  {
+    id: "jeev",
+    title: "Project Jeev",
+    tag: "ANIMAL WELFARE",
+    desc: "Funds localized street animal feeding runs, urgent veterinary rescues, vaccinations, and community water bowls.",
+    img: "https://inamigosfoundation.org.in/public/storage/slideshow/1738235697.jpg",
+    raised: 950000,
+    goal: 1500000,
+    donors: 64
+  },
+  {
+    id: "seva",
+    title: "Project Seva",
+    tag: "POVERTY & HUNGER RELIEF",
+    desc: "Deploys emergency food drives, warm blankets, and clothing distribution to homeless populations and disaster victims.",
+    img: "https://inamigosfoundation.org.in/public/storage/slideshow/1738236132.jpg",
+    raised: 410000,
+    goal: 600000,
+    donors: 198
+  },
+  {
+    id: "prakriti",
+    title: "Project Prakriti",
+    tag: "ENVIRONMENT SUSTAINABILITY",
+    desc: "Sponsors tree saplings, plastic cleanups, and community rainwater harvesting assemblies in drought-prone areas.",
+    img: "https://inamigosfoundation.org.in/public/storage/slideshow/1738236201.jpg",
+    raised: 70000,
+    goal: 120000,
+    donors: 43
+  },
+  {
+    id: "vikas",
+    title: "Project Vikas",
+    tag: "YOUTH CAREER BOOTCAMPS",
+    desc: "Funds structured internship placement cycles, tech training courses, and vocational preparation programs for youth.",
+    img: "https://inamigosfoundation.org.in/public/storage/settings/1738236437.jpg",
+    raised: 150000,
+    goal: 250000,
+    donors: 58
+  }
+];
+
+const formatCurrency = (val) => {
+  return new Intl.NumberFormat('en-IN', {
+    style: 'currency',
+    currency: 'INR',
+    maximumFractionDigits: 0
+  }).format(val);
+};
+---
+
+<Layout>
+  <Navbar />
+  
+  <main class="causes-page">
+    <section class="page-hero">
+      <div class="container">
+        <div class="eyebrow">
+          <span class="eyebrow-dot"></span>
+          <span>ON-GROUND CAMPAIGNS</span>
+        </div>
+        <h1 class="page-title">Initiatives & Funding Metrics</h1>
+        <p class="page-subtitle">
+          We maintain structured funding pools for each program. Monitor our real-time progress and direct your support to the cause closest to your heart.
+        </p>
+      </div>
+    </section>
+
+    <!-- Causes Grid -->
+    <section class="causes-grid-section reveal">
+      <div class="container">
+        <div class="causes-cards-grid">
+          {causes.map(cause => {
+            const pct = Math.min(100, Math.round((cause.raised / cause.goal) * 100));
+            return (
+              <div class="cause-card" id={cause.id} key={cause.id}>
+                <div class="cause-image-wrapper">
+                  <img src={cause.img} alt={cause.title} class="cause-image" />
+                  <span class="cause-badge">{cause.tag}</span>
+                </div>
+                
+                <div class="cause-content">
+                  <h3 class="cause-title">{cause.title}</h3>
+                  <p class="cause-desc">{cause.desc}</p>
+                  
+                  <!-- Progress Bar -->
+                  <div class="progress-container">
+                    <div class="progress-bar-track">
+                      <div class="progress-bar-fill" style={`width: ${pct}%`}></div>
+                    </div>
+                    <div class="progress-labels">
+                      <span class="progress-pct">{pct}% Funded</span>
+                      <span class="donor-count">{cause.donors} Donors</span>
+                    </div>
+                  </div>
+
+                  <!-- Metrics -->
+                  <div class="metrics-grid">
+                    <div class="metric">
+                      <span class="metric-label">Raised</span>
+                      <span class="metric-value">{formatCurrency(cause.raised)}</span>
+                    </div>
+                    <div class="metric">
+                      <span class="metric-label">Goal Target</span>
+                      <span class="metric-value">{formatCurrency(cause.goal)}</span>
+                    </div>
+                  </div>
+
+                  <div class="cause-action">
+                    <a href={`/donate?cause=${cause.id}`} class="btn-primary-pill w-full">Donate to this Project</a>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</Layout>
+
+<style>
+  .causes-page {
+    background-color: var(--color-canvas);
+    padding-bottom: 96px;
+  }
+
+  .container {
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+
+  .page-hero {
+    padding: 160px 0 64px;
+  }
+
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-secondary);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--color-slate);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--color-accent);
+  }
+
+  .page-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+    margin-bottom: 24px;
+  }
+
+  .page-subtitle {
+    font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+    font-weight: 450;
+    line-height: 1.5;
+    color: var(--color-slate);
+    max-width: 800px;
+  }
+
+  /* Grid configuration */
+  .causes-grid-section {
+    padding-bottom: 64px;
+  }
+
+  .causes-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+
+  .cause-card {
+    background-color: var(--color-lifted);
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    border-radius: 40px; /* Stadium container corners */
+    overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.01) 0px 4px 16px;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cause-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(1, 191, 123, 0.2);
+  }
+
+  .cause-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+  }
+
+  .cause-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .cause-badge {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: rgba(20, 20, 19, 0.8);
+    backdrop-filter: blur(8px);
+    color: var(--color-white);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    padding: 6px 14px;
+    border-radius: 999px;
+    text-transform: uppercase;
+  }
+
+  .cause-content {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .cause-title {
+    font-size: 1.35rem;
+    font-weight: 500;
+    color: var(--color-ink);
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+  }
+
+  .cause-desc {
+    font-size: 0.88rem;
+    font-weight: 450;
+    line-height: 1.5;
+    color: var(--color-slate);
+    margin-bottom: 24px;
+    flex-grow: 1;
+  }
+
+  /* Progress meter */
+  .progress-container {
+    margin-bottom: 24px;
+  }
+
+  .progress-bar-track {
+    height: 8px;
+    background-color: var(--color-canvas);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background-color: var(--color-accent);
+    border-radius: 4px;
+  }
+
+  .progress-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+
+  .progress-pct {
+    color: var(--color-ink);
+    font-weight: 700;
+  }
+
+  .donor-count {
+    color: var(--color-slate);
+  }
+
+  /* Metrics Grid */
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    border-top: 1px solid var(--color-dust);
+    border-bottom: 1px solid var(--color-dust);
+    padding: 16px 0;
+    margin-bottom: 24px;
+  }
+
+  .metric {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .metric-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--color-slate);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+  }
+
+  .metric-value {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--color-ink);
+  }
+
+  .btn-primary-pill {
+    display: inline-block;
+    background-color: var(--color-ink);
+    color: var(--color-canvas);
+    font-family: var(--font-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 12px 24px;
+    border-radius: 20px;
+    border: 1.5px solid var(--color-ink);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    text-align: center;
+    width: 100%;
+  }
+
+  .btn-primary-pill:hover {
+    background-color: transparent;
+    color: var(--color-ink);
+    transform: translateY(-1px);
+  }
+
+  /* Responsive breakpoints */
+  @media (max-width: 991px) {
+    .causes-cards-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .causes-cards-grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .cause-content {
+      padding: 24px;
+    }
+  }
+</style>

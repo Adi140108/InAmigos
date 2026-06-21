@@ -1,0 +1,297 @@
+---
+// About.astro
+---
+
+<section id="about" class="about-section reveal">
+  <!-- Ghost Watermark Headline -->
+  <div class="ghost-watermark">MISSION</div>
+
+  <div class="about-container">
+    <div class="about-grid">
+      <!-- Left Column: Title & visual -->
+      <div class="about-left">
+        <div class="eyebrow">
+          <span class="eyebrow-dot"></span>
+          <span>Get To Know Us</span>
+        </div>
+        
+        <h2 class="about-heading">
+          Fostering hope and opportunity across India since 2020.
+        </h2>
+
+        <div class="about-image-wrapper">
+          <img 
+            src="https://inamigosfoundation.org.in/public/storage/settings/1738236437.jpg" 
+            alt="Children smiling together - InAmigos Foundation" 
+            class="about-image"
+            loading="lazy"
+          />
+        </div>
+      </div>
+
+      <!-- Right Column: Detail & certifications -->
+      <div class="about-right">
+        <div class="about-card">
+          <p class="about-text-lead">
+            Founded on September 23, 2020, by Mr. Govind Shukla (Founder & CEO), InAmigos Foundation is a Section 8 registered non-profit organization licensed by the Central Government of India.
+          </p>
+          
+          <p class="about-text-body">
+            Based in Chhattisgarh, we operate with absolute transparency, strict accountability, and high operational standards. We believe in the power of collective action to tackle the most critical social challenges: hunger, lack of educational opportunity, animal suffering, and environmental decline.
+          </p>
+
+          <h3 class="credentials-heading">Our Credentials & Certifications</h3>
+          <div class="badges-grid">
+            <div class="badge-pill">
+              <span class="badge-dot"></span>
+              <span>80G Tax-Exempt</span>
+            </div>
+            <div class="badge-pill">
+              <span class="badge-dot"></span>
+              <span>12A Registered</span>
+            </div>
+            <div class="badge-pill">
+              <span class="badge-dot"></span>
+              <span>CSR-1 Compliant</span>
+            </div>
+            <div class="badge-pill">
+              <span class="badge-dot"></span>
+              <span>NITI Aayog Registered</span>
+            </div>
+            <div class="badge-pill">
+              <span class="badge-dot"></span>
+              <span>IAF ISO 9001:2015</span>
+            </div>
+            <div class="badge-pill">
+              <span class="badge-dot"></span>
+              <span>Section 8 Licensed</span>
+            </div>
+          </div>
+
+          <div class="about-cta-container">
+            <a href="/about" class="link-arrow">
+              Explore Our Full Story <span class="arrow-symbol">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-section {
+    padding: 128px 0;
+    background-color: var(--color-canvas);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Ghost Watermark matching DESIGN.md */
+  .ghost-watermark {
+    position: absolute;
+    top: 40px;
+    left: -40px;
+    font-family: var(--font-primary);
+    font-size: clamp(6rem, 15vw, 12rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    color: #E8E2DA; /* Slightly darker cream-on-cream */
+    user-select: none;
+    pointer-events: none;
+    line-height: 1;
+    z-index: 0;
+  }
+
+  .about-container {
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+    position: relative;
+    z-index: 1;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 64px;
+    align-items: center;
+  }
+
+  .about-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-secondary);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--color-slate);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--color-accent);
+  }
+
+  .about-heading {
+    font-size: clamp(2rem, 3.5vw, 2.75rem);
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+    margin-bottom: 40px;
+  }
+
+  .about-image-wrapper {
+    width: 100%;
+    border-radius: 40px; /* Signature radius */
+    overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 24px 48px 0px;
+  }
+
+  .about-image {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .about-image-wrapper:hover .about-image {
+    transform: scale(1.02);
+  }
+
+  .about-right {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .about-card {
+    background-color: var(--color-lifted); /* Lifted Cream */
+    padding: 48px;
+    border-radius: 40px; /* Stadium container corners */
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 4px 24px;
+    border: 1px solid rgba(0, 0, 0, 0.03);
+  }
+
+  .about-text-lead {
+    font-size: 1.15rem;
+    font-weight: 500;
+    line-height: 1.45;
+    color: var(--color-ink);
+    margin-bottom: 20px;
+  }
+
+  .about-text-body {
+    font-size: 0.95rem;
+    font-weight: 450;
+    line-height: 1.6;
+    color: var(--color-slate);
+    margin-bottom: 32px;
+  }
+
+  .credentials-heading {
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-slate);
+    margin-bottom: 16px;
+    font-family: var(--font-secondary);
+  }
+
+  .badges-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+
+  .badge-pill {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-dust);
+    border-radius: 999px;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-ink);
+    box-shadow: rgba(0, 0, 0, 0.01) 0px 2px 4px;
+  }
+
+  .badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--color-accent);
+  }
+
+  .about-cta-container {
+    margin-top: 16px;
+  }
+
+  .link-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-secondary);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+
+  .arrow-symbol {
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .link-arrow:hover {
+    color: var(--color-accent);
+  }
+
+  .link-arrow:hover .arrow-symbol {
+    transform: translateX(4px);
+  }
+
+  /* Responsive styling */
+  @media (max-width: 991px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+
+    .about-image {
+      height: 300px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .about-section {
+      padding: 64px 0;
+    }
+
+    .about-card {
+      padding: 24px;
+      border-radius: 24px;
+    }
+
+    .badges-grid {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+  }
+</style>

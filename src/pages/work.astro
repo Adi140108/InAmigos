@@ -1,0 +1,510 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+const steps = [
+  {
+    num: "01",
+    title: "Needs Assessment",
+    desc: "We perform active field research and coordinate with local administrations to identify rural schools needing study kits, slums requiring nutrition relief, or stray animal packs lacking care.",
+    img: "https://inamigosfoundation.org.in/public/storage/slideshow/1738235951.jpg"
+  },
+  {
+    num: "02",
+    title: "Resource Allocation",
+    desc: "Individual donations and corporate CSR funds are pooled and directly allocated to active project centers. Budget audits are maintained regularly to ensure 100% direct project funding.",
+    img: "https://inamigosfoundation.org.in/public/storage/slideshow/1738235638.jpg"
+  },
+  {
+    num: "03",
+    title: "Mobilizing Volunteers",
+    desc: "Active coordinators coordinate drives on-site. Our network of 200+ interns and volunteers across 28 states deploy resources—feeding animals, teaching classes, or planting saplings.",
+    img: "https://inamigosfoundation.org.in/public/storage/slideshow/1738236132.jpg"
+  },
+  {
+    num: "04",
+    title: "Impact Audit & Review",
+    desc: "Upon completing field campaigns, we publish summary indices, send PAN-linked 80G tax receipts to donors, and verify project outcomes to optimize future resource allocations.",
+    img: "https://inamigosfoundation.org.in/public/storage/slideshow/1738236201.jpg"
+  }
+];
+
+const fieldPhotos = [
+  {
+    img: "https://inamigosfoundation.org.in/public/storage/gallery/1743051485.jpg",
+    title: "Project Seva Meal Drive",
+    desc: "Serving warm, cooked food to children in urban settlements."
+  },
+  {
+    img: "https://inamigosfoundation.org.in/public/storage/gallery/1743051466.jpg",
+    title: "BachpanSala Study Kits",
+    desc: "Handing out notebooks and elementary geometry boxes."
+  },
+  {
+    img: "https://inamigosfoundation.org.in/public/storage/gallery/1743051449.jpg",
+    title: "Veterinary Relief Campaign",
+    desc: "Administering basic wound care and health checks for strays."
+  },
+  {
+    img: "https://inamigosfoundation.org.in/public/storage/gallery/1743051438.jpg",
+    title: "Prakriti Afforestation Drive",
+    desc: "Planting saplings and setting up tree guard grids."
+  },
+  {
+    img: "https://inamigosfoundation.org.in/public/storage/slideshow/1738235951.jpg",
+    title: "BachpanSala Rural Assembly",
+    desc: "Conducting math and language lessons in regional centers."
+  },
+  {
+    img: "https://inamigosfoundation.org.in/public/storage/slideshow/1738235638.jpg",
+    title: "Project Udaan Skill Center",
+    desc: "Vocational tailoring and computer literacy class."
+  },
+  {
+    img: "https://inamigosfoundation.org.in/public/storage/slideshow/1738235697.jpg",
+    title: "Emergency Rescue Drive",
+    desc: "Deploying active responders to retrieve and treat injured strays."
+  },
+  {
+    img: "https://inamigosfoundation.org.in/public/storage/slideshow/1738236132.jpg",
+    title: "Emergency Blanket Distribution",
+    desc: "Helping homeless families survive cold waves in northern zones."
+  },
+  {
+    img: "https://inamigosfoundation.org.in/public/storage/slideshow/1738236201.jpg",
+    title: "Seed Ball Assembly Campaign",
+    desc: "Volunteers gathering to prepare seed balls for dry regions."
+  },
+  {
+    img: "https://inamigosfoundation.org.in/public/storage/events/1738238109.jpg",
+    title: "Volunteer Orientation Drive",
+    desc: "Welcoming interns and coordinating weekly field operations."
+  },
+  {
+    img: "https://inamigosfoundation.org.in/public/storage/events/1738135259.jpeg",
+    title: "Mobile Health Camp",
+    desc: "Ensuring primary health assessment checks in rural camps."
+  },
+  {
+    img: "https://inamigosfoundation.org.in/public/storage/events/1738134836.jpeg",
+    title: "Career Guidance Consultation",
+    desc: "Providing basic career counselling for high school youth."
+  }
+];
+---
+
+<Layout>
+  <Navbar />
+  
+  <main class="work-page">
+    <!-- Hero Header -->
+    <section class="page-hero">
+      <div class="container text-center">
+        <div class="eyebrow center">
+          <span class="eyebrow-dot"></span>
+          <span>OPERATIONAL METHODOLOGY</span>
+        </div>
+        <h1 class="page-title">How InAmigos Works</h1>
+        <p class="page-subtitle">
+          A transparent, coordinated 4-step framework directing donations and volunteer efforts straight to active field centers across India.
+        </p>
+      </div>
+    </section>
+
+    <!-- Methodology Timeline -->
+    <section class="timeline-section reveal">
+      <div class="container">
+        <div class="timeline-list">
+          {steps.map((step, idx) => (
+            <div class={`timeline-item ${idx % 2 === 1 ? 'inverted' : ''}`} key={step.num}>
+              <!-- Card Details -->
+              <div class="step-card">
+                <span class="step-num">{step.num}</span>
+                <h2 class="step-title">{step.title}</h2>
+                <p class="step-desc">{step.desc}</p>
+              </div>
+
+              <!-- Card Visual -->
+              <div class="step-visual">
+                <div class="visual-stadium">
+                  <img src={step.img} alt={step.title} class="visual-img" loading="lazy" />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Field Operations Gallery -->
+    <section class="gallery-section reveal">
+      <div class="container">
+        <div class="gallery-header text-center">
+          <div class="eyebrow center">
+            <span class="eyebrow-dot"></span>
+            <span>ON-GROUND PORTRAIT</span>
+          </div>
+          <h2 class="gallery-title">Operations in Action</h2>
+          <p class="gallery-subtitle">
+            Visual highlights from our daily animal rescues, school distributions, relief camps, and environmental tasks.
+          </p>
+        </div>
+
+        <div class="gallery-grid">
+          {fieldPhotos.map((photo) => (
+            <div class="gallery-card" key={photo.title}>
+              <div class="image-box">
+                <img src={photo.img} alt="InAmigos field operations" class="gallery-image" loading="lazy" />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="work-cta">
+      <div class="container">
+        <div class="cta-box">
+          <h2 class="cta-title">See our work in action.</h2>
+          <p class="cta-desc">Support our active campaigns or register as a volunteer associate in your state.</p>
+          <div class="cta-buttons">
+            <a href="/causes" class="btn-primary-pill">View Campaigns</a>
+            <a href="/volunteer" class="btn-secondary-pill">Join Volunteer Roster</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</Layout>
+
+<style>
+  .work-page {
+    background-color: var(--color-canvas);
+    padding-bottom: 96px;
+  }
+
+  .container {
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+
+  .text-center {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .page-hero {
+    padding: 160px 0 64px;
+  }
+
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-secondary);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--color-slate);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .eyebrow.center {
+    justify-content: center;
+  }
+
+  .eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--color-accent);
+  }
+
+  .page-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+    margin-bottom: 24px;
+  }
+
+  .page-subtitle {
+    font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+    font-weight: 450;
+    line-height: 1.5;
+    color: var(--color-slate);
+    max-width: 800px;
+  }
+
+  /* Timeline */
+  .timeline-section {
+    padding: 32px 0 64px;
+  }
+
+  .timeline-list {
+    display: flex;
+    flex-direction: column;
+    gap: 96px;
+  }
+
+  .timeline-item {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 64px;
+    align-items: center;
+  }
+
+  .timeline-item.inverted {
+    direction: rtl; /* Flip columns */
+  }
+
+  .timeline-item.inverted .step-card {
+    direction: ltr; /* Reset text direction */
+  }
+
+  .step-card {
+    background-color: var(--color-lifted);
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    border-radius: 40px; /* Stadium container corners */
+    padding: 56px;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 8px 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .step-num {
+    display: block;
+    font-family: var(--font-primary);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    margin-bottom: 24px;
+  }
+
+  .step-title {
+    font-size: 1.75rem;
+    font-weight: 500;
+    color: var(--color-ink);
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+  }
+
+  .step-desc {
+    font-size: 0.98rem;
+    font-weight: 450;
+    line-height: 1.6;
+    color: var(--color-slate);
+  }
+
+  /* Visual Stadium Frame */
+  .step-visual {
+    width: 100%;
+  }
+
+  .visual-stadium {
+    width: 100%;
+    height: 340px;
+    border-radius: 40px; /* Stadium corners */
+    overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.06) 0px 16px 40px;
+  }
+
+  .visual-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Field Operations Gallery */
+  .gallery-section {
+    padding: 64px 0 96px;
+    border-top: 1px solid var(--color-dust);
+  }
+
+  .gallery-header {
+    margin-bottom: 56px;
+  }
+
+  .gallery-title {
+    font-size: clamp(2rem, 3.5vw, 2.75rem);
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+    margin-bottom: 16px;
+  }
+
+  .gallery-subtitle {
+    font-size: 1.05rem;
+    font-weight: 450;
+    color: var(--color-slate);
+    max-width: 600px;
+    line-height: 1.5;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+
+  .gallery-card {
+    border-radius: 40px; /* Rounded stadium layout */
+    overflow: hidden;
+    aspect-ratio: 1.2;
+    box-shadow: rgba(0, 0, 0, 0.04) 0px 8px 24px;
+    background-color: var(--color-white);
+  }
+
+  .image-box {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .gallery-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .gallery-card:hover .gallery-image {
+    transform: scale(1.05);
+  }
+
+
+
+  /* Call To Action Box */
+  .work-cta {
+    padding-bottom: 64px;
+  }
+
+  .cta-box {
+    background-color: var(--color-ink);
+    color: var(--color-white);
+    border-radius: 40px;
+    padding: 64px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: rgba(20, 20, 19, 0.1) 0px 24px 48px;
+  }
+
+  .cta-title {
+    color: var(--color-white);
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+    font-weight: 500;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+
+  .cta-desc {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1rem;
+    margin-bottom: 32px;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 16px;
+  }
+
+  .btn-primary-pill {
+    background-color: var(--color-white);
+    color: var(--color-ink);
+    font-family: var(--font-secondary);
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 12px 32px;
+    border-radius: 20px;
+    border: 1.5px solid var(--color-white);
+    transition: all 0.25s ease;
+  }
+
+  .btn-primary-pill:hover {
+    background-color: transparent;
+    color: var(--color-white);
+  }
+
+  .btn-secondary-pill {
+    background-color: transparent;
+    color: var(--color-white);
+    font-family: var(--font-secondary);
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 12px 32px;
+    border-radius: 20px;
+    border: 1.5px solid var(--color-white);
+    transition: all 0.25s ease;
+  }
+
+  .btn-secondary-pill:hover {
+    background-color: var(--color-white);
+    color: var(--color-ink);
+  }
+
+  /* Responsive styles */
+  @media (max-width: 991px) {
+    .timeline-item {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .timeline-item.inverted {
+      direction: ltr; /* Reset columns direction */
+    }
+
+    .visual-stadium {
+      height: 280px;
+    }
+
+    .gallery-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .step-card, .cta-box {
+      padding: 32px 24px;
+      border-radius: 24px;
+    }
+
+    .visual-stadium {
+      border-radius: 24px;
+    }
+
+    .gallery-grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .gallery-card {
+      border-radius: 24px;
+    }
+
+    .cta-buttons {
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .cta-buttons a {
+      width: 100%;
+      text-align: center;
+    }
+  }
+</style>
