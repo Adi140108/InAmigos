@@ -1,34 +1,31 @@
 ---
 // Floating pill navigation component
 const { pathname } = Astro.url;
-const normalizedPath = pathname.replace(/\/$/, "");
-const isActive = (path: string) => {
-  if (path === "/") {
-    return pathname === "/";
-  }
-  return normalizedPath === path;
-};
+const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
+const relativePath = pathname.startsWith(basePath) ? pathname.slice(basePath.length) : pathname;
+const normalizedPath = relativePath.replace(/\/$/, "") || "/";
+const isActive = (path: string) => normalizedPath === path;
 ---
 
 <header class="nav-container">
   <div class="nav-pill">
-    <a href="/" class="logo">
+    <a href={import.meta.env.BASE_URL} class="logo">
       <img src="https://inamigosfoundation.org.in/public/storage/settings/174421468011.jpg" alt="InAmigos Foundation Logo" />
       <span class="logo-text">InAmigos<span class="brand-dot">.</span></span>
     </a>
     <!-- Desktop Navigation Links -->
     <nav class="desktop-menu">
-      <a href="/" class={`nav-link ${isActive("/") ? "active" : ""}`}>Home</a>
-      <a href="/about" class={`nav-link ${isActive("/about") ? "active" : ""}`}>About Us</a>
-      <a href="/work" class={`nav-link ${isActive("/work") ? "active" : ""}`}>Our Work</a>
-      <a href="/team" class={`nav-link ${isActive("/team") ? "active" : ""}`}>Our Team</a>
-      <a href="/causes" class={`nav-link ${isActive("/causes") ? "active" : ""}`}>Projects</a>
-      <a href="/impact" class={`nav-link ${isActive("/impact") ? "active" : ""}`}>Our Impact</a>
-      <a href="/volunteer" class={`nav-link ${isActive("/volunteer") ? "active" : ""}`}>Volunteer</a>
+      <a href={import.meta.env.BASE_URL} class={`nav-link ${isActive("/") ? "active" : ""}`}>Home</a>
+      <a href={`${import.meta.env.BASE_URL}about`} class={`nav-link ${isActive("/about") ? "active" : ""}`}>About Us</a>
+      <a href={`${import.meta.env.BASE_URL}work`} class={`nav-link ${isActive("/work") ? "active" : ""}`}>Our Work</a>
+      <a href={`${import.meta.env.BASE_URL}team`} class={`nav-link ${isActive("/team") ? "active" : ""}`}>Our Team</a>
+      <a href={`${import.meta.env.BASE_URL}causes`} class={`nav-link ${isActive("/causes") ? "active" : ""}`}>Projects</a>
+      <a href={`${import.meta.env.BASE_URL}impact`} class={`nav-link ${isActive("/impact") ? "active" : ""}`}>Our Impact</a>
+      <a href={`${import.meta.env.BASE_URL}volunteer`} class={`nav-link ${isActive("/volunteer") ? "active" : ""}`}>Volunteer</a>
     </nav>
  
     <div class="nav-right">
-      <a href="/donate" class="btn-primary">Donate</a>
+      <a href={`${import.meta.env.BASE_URL}donate`} class="btn-primary">Donate</a>
       <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
         <span></span>
         <span></span>
@@ -40,14 +37,14 @@ const isActive = (path: string) => {
   <!-- Mobile Menu Overlay -->
   <div class="mobile-menu-overlay" id="mobileMenu">
     <nav class="mobile-nav">
-      <a href="/" class={`mobile-link ${isActive("/") ? "active" : ""}`}>Home</a>
-      <a href="/about" class={`mobile-link ${isActive("/about") ? "active" : ""}`}>About Us</a>
-      <a href="/work" class={`mobile-link ${isActive("/work") ? "active" : ""}`}>Our Work</a>
-      <a href="/team" class={`mobile-link ${isActive("/team") ? "active" : ""}`}>Our Team</a>
-      <a href="/causes" class={`mobile-link ${isActive("/causes") ? "active" : ""}`}>Projects</a>
-      <a href="/impact" class={`mobile-link ${isActive("/impact") ? "active" : ""}`}>Our Impact</a>
-      <a href="/volunteer" class={`mobile-link ${isActive("/volunteer") ? "active" : ""}`}>Volunteer</a>
-      <a href="/donate" class="btn-primary mobile-btn">Donate</a>
+      <a href={import.meta.env.BASE_URL} class={`mobile-link ${isActive("/") ? "active" : ""}`}>Home</a>
+      <a href={`${import.meta.env.BASE_URL}about`} class={`mobile-link ${isActive("/about") ? "active" : ""}`}>About Us</a>
+      <a href={`${import.meta.env.BASE_URL}work`} class={`mobile-link ${isActive("/work") ? "active" : ""}`}>Our Work</a>
+      <a href={`${import.meta.env.BASE_URL}team`} class={`mobile-link ${isActive("/team") ? "active" : ""}`}>Our Team</a>
+      <a href={`${import.meta.env.BASE_URL}causes`} class={`mobile-link ${isActive("/causes") ? "active" : ""}`}>Projects</a>
+      <a href={`${import.meta.env.BASE_URL}impact`} class={`mobile-link ${isActive("/impact") ? "active" : ""}`}>Our Impact</a>
+      <a href={`${import.meta.env.BASE_URL}volunteer`} class={`mobile-link ${isActive("/volunteer") ? "active" : ""}`}>Volunteer</a>
+      <a href={`${import.meta.env.BASE_URL}donate`} class="btn-primary mobile-btn">Donate</a>
     </nav>
   </div></header>
 
@@ -311,7 +308,7 @@ const isActive = (path: string) => {
   }
 
   /* Responsive breakpoints */
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     .desktop-menu {
       display: none;
     }
@@ -326,6 +323,32 @@ const isActive = (path: string) => {
 
     .nav-right .btn-primary {
       display: none; /* hidden on small screen header, shown in full menu */
+    }
+  }
+
+  @media (max-width: 640px) {
+    .nav-container {
+      padding: 12px 16px;
+    }
+
+    .nav-pill {
+      padding: 8px 16px;
+    }
+
+    .logo-text {
+      font-size: 1.35rem;
+    }
+
+    .logo img {
+      height: 40px;
+    }
+
+    .nav-pill.scrolled .logo-text {
+      font-size: 1.15rem;
+    }
+
+    .nav-pill.scrolled .logo img {
+      height: 36px;
     }
   }
 </style>

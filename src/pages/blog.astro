@@ -100,8 +100,8 @@ const posts = [
               <p id="modalBody" class="modal-body-text">Full text of the post goes here...</p>
               
               <div class="modal-action-row">
-                <a href="/volunteer" class="btn-primary-pill">Join as Volunteer</a>
-                <a href="/donate" class="btn-secondary-pill">Support Cause</a>
+                <a href={`${import.meta.env.BASE_URL}volunteer`} class="btn-primary-pill">Join as Volunteer</a>
+                <a href={`${import.meta.env.BASE_URL}donate`} class="btn-secondary-pill">Support Cause</a>
               </div>
             </div>
           </div>
