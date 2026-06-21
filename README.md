@@ -1,6 +1,6 @@
 # InAmigos Foundation NGO Webpage
 
-Welcome to the official repository of the InAmigos Foundation NGO Webpage. This project was developed as a modern, high-performance web portal for InAmigos Foundation as part of my **Web Development Internship**.
+Welcome to the repository of the InAmigos Foundation NGO Webpage made as a part of internship task. This project was developed as a modern, high-performance web portal for InAmigos Foundation as part of my **Web Development Internship**.
 
 ## 📌 Project Overview
 This website is built with **Astro 6.x** and **Vanilla CSS** to achieve maximum performance, flexibility, and lightweight page loads. The design features a modern **Mastercard-inspired aesthetic** featuring rich dark palettes, dynamic interactive widgets, and seamless user experiences.
